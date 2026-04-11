@@ -104,7 +104,7 @@ const frontendPath = path.join(__dirname, '../../dist');
 app.use(express.static(frontendPath));
 
 // Все остальные запросы (кроме /api) перенаправляем на index.html фронтенда (для SPA)
-app.get('*', (req: any, res: any) => {
+app.get('/*', (req: any, res: any) => {
   if (!req.path.startsWith('/api')) {
     res.sendFile(path.join(frontendPath, 'index.html'));
   }
