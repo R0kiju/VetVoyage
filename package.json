@@ -9,7 +9,7 @@
     "dev:full": "concurrently \"npm run dev\" \"npm run server\"",
     "build": "npm install && npm run build:frontend && npm run build:server",
     "build:frontend": "tsc -b && vite build",
-    "build:server": "cd server && npm install",
+    "build:server": "cd server && npm install && npm run build",
     "start": "cd server && npm run start",
     "lint": "eslint .",
     "preview": "vite preview"
