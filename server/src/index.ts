@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
@@ -98,12 +99,23 @@ app.delete('/api/bookings/:id', authMiddleware, async (req: any, res: any) => {
   }
 });
 
+// --- СТАТИЧЕСКИЕ ФАЙЛЫ (Для Production на Render.com) ---
+const frontendPath = path.join(__dirname, '../../dist');
+app.use(express.static(frontendPath));
+
+// Все остальные запросы (кроме /api) перенаправляем на index.html фронтенда (для SPA)
+app.get('*', (req: any, res: any) => {
+  if (!req.path.startsWith('/api')) {
+    res.sendFile(path.join(frontendPath, 'index.html'));
+  }
+});
+
 // Запуск
 const start = async () => {
   await initDb();
   await ensureAdmin();
   app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
   });
 };
 

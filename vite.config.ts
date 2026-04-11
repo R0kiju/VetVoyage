@@ -6,6 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
+    allowedHosts: ['vetvoyage.onrender.com'],
     proxy: {
       '/api': {
         target: 'http://localhost:3001',
