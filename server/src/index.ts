@@ -99,12 +99,15 @@ app.delete('/api/bookings/:id', authMiddleware, async (req: any, res: any) => {
   }
 });
 
-// --- СТАТИЧЕСКИЕ ФАЙЛЫ (Для Production на Render.com) ---
+// --- СТАТИЧЕСКИЕ ФАЙЛЫ ---
 const frontendPath = path.join(__dirname, '../../dist');
 app.use(express.static(frontendPath));
 
-// Все остальные запросы (кроме /api) перенаправляем на index.html фронтенда (для SPA)
-app.get(/^(?!\/api).+/, (req: any, res: any) => {
+// Для SPA: если запрос не к API и файл не найден, отдаем index.html
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next();
+  }
   res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
