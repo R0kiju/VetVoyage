@@ -2,15 +2,15 @@ import express from 'express';
 import path from 'path';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
-import { initDb, query, Booking, User } from './db';
+import { initDb, query } from './db';
+import authRoutes from './routes/auth.routes';
+import bookingRoutes from './routes/booking.routes';
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3001;
-const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
 
 app.use(cors());
 app.use(express.json());
@@ -34,70 +34,9 @@ const ensureAdmin = async () => {
   }
 };
 
-// Middleware для авторизации
-const authMiddleware = (req: any, res: any, next: any) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'Нет доступа' });
-
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded;
-    next();
-  } catch (err) {
-    res.status(401).json({ message: 'Неверный токен' });
-  }
-};
-
-// Эндпоинты
-app.post('/api/auth/login', async (req: any, res: any) => {
-  const { password } = req.body;
-  try {
-    const result = await query('SELECT * FROM users WHERE username = $1', ['admin']);
-    const admin = result.rows[0];
-
-    if (admin && await bcrypt.compare(password, admin.password_hash)) {
-      const token = jwt.sign({ username: 'admin' }, JWT_SECRET, { expiresIn: '1d' });
-      res.json({ token });
-    } else {
-      res.status(401).json({ message: 'Неверный пароль' });
-    }
-  } catch (err) {
-    res.status(500).json({ message: 'Ошибка сервера' });
-  }
-});
-
-app.post('/api/bookings', async (req: any, res: any) => {
-  const { name, phone, service, date, time } = req.body;
-  try {
-    const result = await query(
-      'INSERT INTO bookings (name, phone, service, date, time) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-      [name, phone, service, date, time]
-    );
-    res.status(201).json(result.rows[0]);
-  } catch (err) {
-    console.error('Error creating booking:', err);
-    res.status(500).json({ message: 'Ошибка при сохранении' });
-  }
-});
-
-app.get('/api/bookings', authMiddleware, async (req: any, res: any) => {
-  try {
-    const result = await query('SELECT * FROM bookings ORDER BY id DESC');
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ message: 'Ошибка при получении данных' });
-  }
-});
-
-app.delete('/api/bookings/:id', authMiddleware, async (req: any, res: any) => {
-  const id = parseInt(req.params.id);
-  try {
-    await query('DELETE FROM bookings WHERE id = $1', [id]);
-    res.json({ message: 'Удалено' });
-  } catch (err) {
-    res.status(500).json({ message: 'Ошибка при удалении' });
-  }
-});
+// Routes
+app.use('/api/auth', authRoutes);
+app.use('/api/bookings', bookingRoutes);
 
 // --- СТАТИЧЕСКИЕ ФАЙЛЫ ---
 const frontendPath = path.join(__dirname, '../../dist');
@@ -113,11 +52,15 @@ app.use((req, res, next) => {
 
 // Запуск
 const start = async () => {
-  await initDb();
-  await ensureAdmin();
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+  try {
+    await initDb();
+    await ensureAdmin();
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error('Failed to start server:', err);
+  }
 };
 
 start();

@@ -1,49 +1,49 @@
 const Pricing = () => {
-  const prices = [
-    { service: 'Гостиница (передержка)', day: '8 000 – 15 000 ₸', week: '50 000 – 90 000 ₸', month: '180 000 – 300 000 ₸' },
-    { service: 'Ветеринарный осмотр', day: '3 000 – 7 000 ₸', week: '—', month: '—' },
-    { service: 'Груминг (полный уход)', day: '5 000 – 10 000 ₸', week: '—', month: '—' },
-    { service: 'Спецтакси (за поездку)', day: '2 000 – 5 000 ₸', week: '—', month: '—' }
+  const priceList = [
+    { service: 'Гостиница (Стандарт)', price: 'от 5 000 ₸ / день', features: 'Питание, прогулки 2 раза в день' },
+    { service: 'Гостиница (Luxe)', price: 'от 8 000 ₸ / день', features: 'Видеонаблюдение, индивидуальное меню' },
+    { service: 'Ветеринарный осмотр', price: 'от 3 000 ₸', features: 'Первичная консультация врача' },
+    { service: 'Груминг (Полный комплекс)', price: 'от 7 000 ₸', features: 'Стрижка, мытье, когти, уши' },
+    { service: 'Спецтакси (по городу)', price: 'от 2 500 ₸', features: 'Комфортная перевозка в боксе' },
   ];
 
   return (
-    <div className="container reveal" style={{ padding: '50px 0' }}>
-      <h2>Цены на услуги VetVoyage</h2>
-      <p>Стоимость услуг зависит от размера питомца и выбранного пакета обслуживания.</p>
-      
-      <div className="table-wrapper reveal">
-        <table className="pricing-table">
-          <thead>
-          <tr>
-            <th>Вид услуги</th>
-            <th>День / Разово</th>
-            <th>Неделя</th>
-            <th>Месяц</th>
-          </tr>
-        </thead>
-        <tbody>
-          {prices.map((p, idx) => (
-            <tr key={idx} className="reveal">
-              <td>{p.service}</td>
-              <td>{p.day}</td>
-              <td>{p.week}</td>
-              <td>{p.month}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <section className="bg-white">
+      <div className="container reveal">
+        <div className="section-title">
+          <h2>Услуги и Стоимость</h2>
+          <p className="text-italic" style={{ marginTop: '20px' }}>Прозрачное ценообразование без скрытых платежей</p>
+        </div>
+        
+        <div className="table-wrapper">
+          <table className="pricing-table">
+            <thead>
+              <tr>
+                <th>Услуга</th>
+                <th>Описание</th>
+                <th>Стоимость</th>
+              </tr>
+            </thead>
+            <tbody>
+              {priceList.map((item, index) => (
+                <tr key={index}>
+                  <td style={{ fontWeight: 600 }}>{item.service}</td>
+                  <td>{item.features}</td>
+                  <td className="text-gold" style={{ fontWeight: 600 }}>{item.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+          <p style={{ marginBottom: '20px' }}>Нужна индивидуальная консультация?</p>
+          <a href="https://wa.me/77718637508" className="btn btn-outline" target="_blank" rel="noreferrer">
+            Связаться в WhatsApp
+          </a>
+        </div>
       </div>
-
-      <div className="reveal" style={{ marginTop: '30px' }}>
-        <h3>Преимущества нашего сервиса:</h3>
-        <ul>
-          <li>Круглосуточное ветеринарное наблюдение в гостинице.</li>
-          <li>Безопасная перевозка в специализированных боксах.</li>
-          <li>Использование профессиональной косметики при груминге.</li>
-          <li>Система лояльности для постоянных клиентов.</li>
-        </ul>
-      </div>
-    </div>
+    </section>
   );
 };
 
