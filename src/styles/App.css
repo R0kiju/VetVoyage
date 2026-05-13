@@ -417,21 +417,68 @@ nav a.active {
   background: var(--white);
 }
 
-/* Tables */
+/* Tables Redesign - Professional Figma Standard */
 .table-wrapper {
   background: var(--white);
-  box-shadow: var(--shadow-md);
-  margin-top: 40px;
+  box-shadow: var(--shadow-lg);
+  margin-top: 50px;
+  overflow: hidden;
+  border: 1px solid var(--divider);
 }
 
 .pricing-table {
+  width: 100%;
+  border-collapse: collapse;
   margin: 0;
+  font-family: 'EB Garamond', serif;
 }
 
 .pricing-table th {
-  background: var(--secondary);
+  background-color: var(--secondary);
   color: var(--white);
+  text-align: left;
+  padding: 20px 25px;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 700;
+  border: none;
+}
+
+.pricing-table td {
+  padding: 22px 25px;
+  border-bottom: 1px solid var(--divider);
+  color: var(--text);
+  font-size: 1.05rem;
+  transition: background-color 0.3s ease;
+}
+
+.pricing-table tr:last-child td {
   border-bottom: none;
+}
+
+.pricing-table tr:hover td {
+  background-color: rgba(212, 175, 55, 0.03); /* Very subtle gold highlight */
+}
+
+.pricing-table .price-cell {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--primary);
+  white-space: nowrap;
+}
+
+.pricing-table .service-name {
+  font-weight: 600;
+  color: var(--midnight);
+}
+
+@media (max-width: 768px) {
+  .pricing-table th, .pricing-table td {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
 }
 
 /* Footer */
