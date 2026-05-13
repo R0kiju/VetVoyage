@@ -12,11 +12,11 @@ const Home = () => {
     <div>
       <section className="hero">
         <div className="container hero-content">
-          <p className="fade-in text-gold">Premium Pet Services</p>
-          <h2>VetVoyage: Экосистема заботы о вашем питомце</h2>
-          <p className="hero-subtext">Комплексный подход и безупречный сервис для тех, кто выбирает лучшее.</p>
-          <div className="hero-btns">
-            <Link to="/booking" className="btn">Записаться</Link>
+          <p className="reveal text-gold" style={{ letterSpacing: '0.4em', fontWeight: 700, marginBottom: '20px' }}>EST. 2026 • PREMIUM CARE</p>
+          <h2 className="reveal">VetVoyage: Искусство преданности</h2>
+          <p className="reveal italic">Экосистема, где технологии будущего встречаются с искренним теплом человеческого сердца.</p>
+          <div className="hero-btns reveal" style={{ marginTop: '40px' }}>
+            <Link to="/booking" className="btn">Забронировать визит</Link>
             <Link to="/pricing" className="btn btn-outline" style={{ marginLeft: '20px' }}>Наши услуги</Link>
           </div>
         </div>
@@ -25,7 +25,8 @@ const Home = () => {
       <section className="bg-white">
         <div className="container">
           <div className="section-title reveal">
-            <h2>Наши Услуги</h2>
+            <h2 style={{ fontSize: '3rem' }}>Сервисы Excellence</h2>
+            <p className="italic" style={{ color: 'var(--primary)', marginTop: '10px' }}>Безупречность в каждой детали</p>
           </div>
           <div className="categories">
             {services.map(service => (
@@ -33,10 +34,10 @@ const Home = () => {
                 <div className="card-image-wrapper">
                   <img src={service.img} alt={service.name} />
                 </div>
-                <div className="card-content">
+                <div className="card-content" style={{ textAlign: 'center' }}>
                   <h3>{service.name}</h3>
-                  <p>{service.desc}</p>
-                  <Link to="/pricing" className="btn btn-outline" style={{ padding: '10px 25px' }}>Подробнее</Link>
+                  <p className="italic">{service.desc}</p>
+                  <Link to="/pricing" className="btn btn-outline" style={{ padding: '12px 30px', fontSize: '0.7rem' }}>Подробнее</Link>
                 </div>
               </div>
             ))}
@@ -44,26 +45,26 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="bg-cream">
+      <section className="bg-cream" style={{ borderTop: '1px solid var(--divider)' }}>
         <div className="container">
           <div className="section-title reveal">
             <h2>Почему выбирают нас</h2>
           </div>
           <div className="features-grid">
             <div className="feature-item reveal">
-              <span style={{ fontSize: '2.5rem' }}>🏆</span>
-              <h3>Высший стандарт</h3>
-              <p>Мы используем только проверенные методики и лучшее оборудование.</p>
+              <span style={{ fontSize: '3rem', color: 'var(--primary)' }}>◆</span>
+              <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.15em' }}>Высший стандарт</h3>
+              <p>Мы используем только проверенные методики и оборудование мирового класса.</p>
             </div>
             <div className="feature-item reveal">
-              <span style={{ fontSize: '2.5rem' }}>❤️</span>
-              <h3>Забота с любовью</h3>
-              <p>Каждый питомец для нас — член семьи, требующий индивидуального подхода.</p>
+              <span style={{ fontSize: '3rem', color: 'var(--primary)' }}>◆</span>
+              <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.15em' }}>Забота с любовью</h3>
+              <p>Каждый питомец для нас — член семьи, требующий индивидуального подхода и тепла.</p>
             </div>
             <div className="feature-item reveal">
-              <span style={{ fontSize: '2.5rem' }}>🛡️</span>
-              <h3>Безопасность 24/7</h3>
-              <p>Круглосуточное видеонаблюдение и дежурный ветеринар в гостинице.</p>
+              <span style={{ fontSize: '3rem', color: 'var(--primary)' }}>◆</span>
+              <h3 style={{ textTransform: 'uppercase', letterSpacing: '0.15em' }}>Безопасность 24/7</h3>
+              <p>Круглосуточное видеонаблюдение и дежурный специалист в каждой зоне сервиса.</p>
             </div>
           </div>
         </div>

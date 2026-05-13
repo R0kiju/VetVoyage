@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import Pricing from './pages/Pricing';
 import Booking from './pages/Booking';
 import Admin from './pages/Admin';
-import Poster from './pages/Poster';
 import './styles/App.css';
 
 // Component to handle scroll to top and reveal animations on route change
@@ -51,7 +50,6 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/booking" element={<Booking />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/poster" element={<Poster />} />
           </Routes>
         </main>
         <Footer />
