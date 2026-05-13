@@ -13,7 +13,7 @@ const Home = () => {
       <section className="hero">
         <div className="container hero-content">
           <p className="reveal text-gold" style={{ letterSpacing: '0.4em', fontWeight: 700, marginBottom: '20px' }}>EST. 2026 • PREMIUM CARE</p>
-          <h2 className="reveal">VetVoyage: Искусство преданности</h2>
+          <h2 className="reveal text-gold-shimmer">VetVoyage: Искусство преданности</h2>
           <p className="reveal italic">Экосистема, где технологии будущего встречаются с искренним теплом человеческого сердца.</p>
           <div className="hero-btns reveal" style={{ marginTop: '40px' }}>
             <Link to="/booking" className="btn">Забронировать визит</Link>

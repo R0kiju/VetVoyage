@@ -158,11 +158,105 @@ nav a:hover { color: var(--primary); }
 .form-group input, .form-group select { width: 100%; border: none; border-bottom: 1px solid var(--divider); background: transparent; padding: 15px 0; font-family: 'EB Garamond', serif; font-size: 1.1rem; outline: none; border-radius: 0; }
 .form-group input:focus { border-bottom-color: var(--primary); }
 
-.table-wrapper { background: var(--white); box-shadow: var(--shadow-lg); margin-top: 50px; overflow: hidden; border: 1px solid var(--divider); }
-.pricing-table { width: 100%; border-collapse: collapse; }
-.pricing-table th { background-color: var(--secondary); color: var(--white); text-align: left; padding: 20px 25px; font-family: 'Playfair Display', serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.15em; }
-.pricing-table td { padding: 22px 25px; border-bottom: 1px solid var(--divider); }
-.pricing-table tr:hover td { background-color: rgba(197, 160, 89, 0.03); }
+/* --- ADVANCED ANIMATIONS --- */
+@keyframes fluidUp {
+  0% { opacity: 0; transform: translateY(40px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes goldShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- PREMIUM PRICING TABLE REDESIGN --- */
+.table-wrapper {
+  background: var(--white);
+  padding: 2px;
+  background: linear-gradient(135deg, var(--divider), transparent, var(--divider));
+  box-shadow: var(--shadow-lg);
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: var(--white);
+}
+
+.pricing-table th {
+  background-color: var(--secondary);
+  color: var(--white);
+  text-align: left;
+  padding: 30px 40px;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  border: none;
+}
+
+.pricing-table td {
+  padding: 30px 40px;
+  border-bottom: 1px solid #F0F0F0;
+  transition: all 0.4s ease;
+  background: var(--white);
+}
+
+.pricing-table tr:last-child td {
+  border-bottom: none;
+}
+
+.pricing-table tr:hover td {
+  background-color: #FAF9F6;
+  transform: scale(1.005);
+  box-shadow: inset 4px 0 0 var(--primary);
+}
+
+.pricing-table .service-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.pricing-table .price-cell {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--primary);
+  text-align: right;
+  position: relative;
+}
+
+.pricing-table .features-cell {
+  font-style: italic;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* Subtle Shimmer for Gold elements */
+.text-gold-shimmer {
+  background: linear-gradient(90deg, #C5A059, #F2E3C6, #C5A059);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: goldShimmer 4s linear infinite;
+}
 
 footer { background-color: var(--secondary); color: rgba(255,255,255,0.7); padding: 80px 0 40px; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }

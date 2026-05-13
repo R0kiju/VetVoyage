@@ -21,15 +21,15 @@ const Pricing = () => {
               <tr>
                 <th>Услуга</th>
                 <th>Описание</th>
-                <th>Стоимость</th>
+                <th style={{ textAlign: 'right' }}>Стоимость</th>
               </tr>
             </thead>
             <tbody>
               {priceList.map((item, index) => (
                 <tr key={index}>
-                  <td style={{ fontWeight: 600 }}>{item.service}</td>
-                  <td>{item.features}</td>
-                  <td className="text-gold" style={{ fontWeight: 600 }}>{item.price}</td>
+                  <td className="service-name">{item.service}</td>
+                  <td className="features-cell">{item.features}</td>
+                  <td className="price-cell">{item.price}</td>
                 </tr>
               ))}
             </tbody>
