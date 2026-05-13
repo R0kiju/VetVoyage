@@ -1,5 +1,4 @@
 
-import React from 'react';
 import '../styles/Poster.css';
 
 const Poster = () => {
